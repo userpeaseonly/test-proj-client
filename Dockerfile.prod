@@ -1,0 +1,27 @@
+# Step 1: Build
+FROM node:18-alpine AS builder
+
+WORKDIR /app
+RUN npm install -g pnpm
+
+COPY package*.json ./
+RUN pnpm install
+
+# Copy source code (node_modules excluded via .dockerignore)
+COPY . .
+
+RUN pnpm build
+
+# Step 2: Run
+FROM node:18-alpine
+
+WORKDIR /app
+RUN npm install -g pnpm
+
+COPY --from=builder /app ./
+
+ENV NODE_ENV=production
+
+EXPOSE 3000
+
+CMD ["pnpm", "start"]
