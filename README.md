@@ -125,6 +125,21 @@ npm run dev
 4. **Open your browser:**
 Navigate to `http://localhost:3000`
 
+## 🐳 Production Deployment
+
+For production deployment using Docker:
+
+1. **Configure production environment:**
+```bash
+# .env.production
+NEXT_PUBLIC_API_BASE_URL=https://your-production-api.com
+```
+
+2. **Run production Docker Compose:**
+```bash
+docker-compose -f docker-compose.prod.yml up -d
+```
+
 ## 🔐 Authentication Flow
 
 ### Login Process
